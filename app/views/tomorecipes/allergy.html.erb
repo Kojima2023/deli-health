@@ -1,0 +1,68 @@
+<h1>検索一覧ページ：「食物アレルギー・食物不耐症」で食べられないものがある方向け</h1>
+
+<h3>検索カテゴリ</h3>
+<%= link_to "検索一覧", tomorecipes_path %>
+<%= link_to "病気", tomorecipes_sick_path %>
+<%= link_to "食物アレルギー・食物不耐症", tomorecipes_allergy_path %>
+<%= link_to "苦手", tomorecipes_weak_path %>
+<%= link_to "その他または理由なし", tomorecipes_others_path %>
+
+<h3>ハッシュタグ検索（どんな方向けか？(原因・症状)：食物アレルギー名・食物不耐症名）</h3>
+<% @tag_list.each do |list| %>
+  #<%= link_to list.tag_name, tag_tomorecipes_path(tag_id: list.id) %>
+  <%= "(#{list.tomorecipes.count})" %>
+<% end %>
+
+<p>「食物アレルギー*」は発症数、重篤度が高いもの</p>
+蕎麦・落花生・乳製品・卵・小麦・えび・かに
+<p>「食物アレルギー」は加工食品などの原材料で任意表記のもの</p>
+あわび・いくら・鮭・鯖・いか・くるみ・キウイフルーツ・りんご・大豆・カシューナッツ・ごま・鶏肉・豚肉・牛肉・ゼラチン・まつたけ・バナナ・山芋・桃・オレンジ
+
+<h3>レシピを検索</h3>
+<%= form_tag({controller:"tomorecipes",action:"allergy"}, method: :get) do %>
+   <%= text_field_tag :search %>
+   <%= submit_tag '検索する'  %>
+<% end %>
+
+<div class="tomorecipes-container">
+  <% @tomorecipes.each do |t| %>
+    <div class="tomorecipe">
+      
+      <%= image_tag t.image_url, size: "250x200" if t.image? %>
+      <%=  video_tag t.video_url, size: "250x200" ,:controls => true if t.video?%>
+      <br>
+      <%= t.title %>
+      <br>
+      <% t.tags.each do |tag| %>
+        #<%= link_to tag.tag_name, tag_tomorecipes_path(tag_id: tag.id) %>
+      <% end %>
+      <br>
+      <%= image_tag t.user.image_url, class: "user-icon" if t.user.image? %>
+      <%= link_to t.user.name, user_path(t.user.id) %>
+      <br>
+
+      <% if user_signed_in? %>
+        <% if current_user.already_liked?(t) %>
+          <%= link_to tomorecipe_like_path(id: t.id, tomorecipe_id: t.id), method: :delete do %>
+            <i class="fas fa-heart"></i><%= t.likes.count %>
+          <% end %>
+        <% else %>
+          <%= link_to tomorecipe_likes_path(id: t.id, tomorecipe_id: t.id), method: :tomorecipe do %>
+            <i class="fa-regular fa-heart"></i><%= t.likes.count %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <i class="fa-regular fa-heart"></i><%= t.likes.count %>
+      <% end %>
+      
+      <%= link_to "詳細へ", tomorecipe_path(t.id) %>
+      <% if user_signed_in? && current_user.id == t.user_id %>
+        <%= link_to "編集する", edit_tomorecipe_path(t.id) %>
+        <%= link_to "削除する", tomorecipe_path(t.id), method: :delete %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<%= page_entries_info @tomorecipes %>
+<%= paginate @tomorecipes %>

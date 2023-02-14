@@ -1,0 +1,52 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.actions{
+    input[type="submit"] {
+      width: 300px;
+      display: table;
+      font-size: 20px;
+      font-family: 'Zen Antique Soft', sans-serif;
+      margin: 10px auto 30px auto;
+      color: white;
+      background-color: #3B0B11;
+    }
+}
+
+.field {
+    display: table;
+    margin: 0 auto 30px auto;
+}
+
+.field input {
+    background-color: none;
+    width: 200px;
+    height: 40px;
+    font-size: 100%;
+}
+
+.field input[type="checkbox"] {
+    width: 25px;
+    height: 25px;
+}
+
+.field input:focus {
+    outline: 0;
+}
+
+.login-wrapper a {
+    margin: 0 auto;
+}
+ 
+/*.field{
+    input[type="file"] {
+      width: 300px;
+      font-size: 20px;
+      font-family: 'Zen Antique Soft', sans-serif;
+      margin-top: 10px;
+      margin-bottom: 30px;
+      color: white;
+      background-color: #3B0B11;
+    }
+}*/

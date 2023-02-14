@@ -1,0 +1,51 @@
+<h1><%= @user.name %>のマイページ</h1>
+
+<h3>検索カテゴリ</h3>
+<%= link_to "検索一覧", tomorecipes_path %>
+<%= link_to "病気", tomorecipes_sick_path %>
+<%= link_to "食物アレルギー・食物不耐症", tomorecipes_allergy_path %>
+<%= link_to "苦手", tomorecipes_weak_path %>
+<%= link_to "その他または理由なし", tomorecipes_others_path %>
+
+<p>名前（ニックネーム） : <%= @user.name %></p>
+<%= image_tag @user.image_url, size: "25×20" if @user.image? %>
+<p>自己紹介 : <%= @user.profile %></p>
+<p>メールアドレス : <%= @user.email %></p>
+<p>リンク情報 : <a href="<%= @user.user_url %>"><%= @user.user_url %></a></p>
+
+<% if user_signed_in? %>
+  <% if current_user.id == @user.id %>
+    <%= link_to "プロフィールを編集", edit_user_registration_path %>
+    <%= link_to "投稿一覧", user_path %>
+  <% end %>
+<% end %>
+
+<h2>♡いいね保存した投稿一覧</h2>
+<% @user.liked_tomorecipes.each do |t| %>
+  <%= image_tag t.image_url, size: "250x200" if t.image? %>
+  <%=  video_tag t.video_url, size: "250x200" ,:controls => true if t.video?%>
+  <%= t.title %>
+  <%= image_tag t.user.image_url, size: "25x20" if t.user.image? %>
+  <%= link_to t.user.name, user_path(t.user.id) %>
+  
+   <% if user_signed_in? %>
+    <% if current_user.already_liked?(t) %>
+      <%= link_to tomorecipe_like_path(id: t.id, tomorecipe_id: t.id), method: :delete do %>
+        <i class="fas fa-heart"></i><%= t.likes.count %>
+      <% end %>
+    <% else %>
+      <%= link_to tomorecipe_likes_path(id: t.id, tomorecipe_id: t.id), method: :post do %>
+        <i class="fa-regular fa-heart"></i><%= t.likes.count %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <i class="fa-regular fa-heart"></i><%= t.likes.count %>
+  <% end %>
+        
+  <%= link_to "詳細へ", tomorecipe_path(t.id) %>
+  <% if user_signed_in? && current_user.id == t.user_id %>
+    <%= link_to "編集する", edit_tomorecipe_path(t.id) %>
+    <%= link_to "削除する", tomorecipe_path(t.id), method: :delete %>
+  <% end %>
+  <br>
+<% end %>

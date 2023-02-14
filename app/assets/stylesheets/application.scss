@@ -1,0 +1,241 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ * {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #3B0B11;
+  font-family: 'Noto Sans Japanese', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: 'Noto Sans Japanese', 'Noto Sans', 'Zen Antique Soft', sans-serif;
+  background-color: #FAF4ED;
+}
+
+header {
+  background-color: #3B0B11;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-left {
+  //font-family: 'Zen Antique Soft', sans-serif;
+  //color: white;
+  margin-left: 30px;
+  //margin-top: 10px;
+  //font-weight: bold;
+  //font-size: 40px;
+  //display: inline-block;
+}
+
+.header-img {
+  width: 70px;
+  height: 70px;
+  //margin-top: 30px;
+  //margin-left: -10px;
+}
+
+.header-list ul {
+  font-family: 'Noto Sans Japanese', sans-serif;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.header-list li {
+  list-style: none;
+  margin-right: 40px;
+  color: white;
+}
+
+// ヘッダーのaタグのマウスオーバー
+.header-list a {
+  color: white;
+  position: relative;
+  display: inline-block;
+}
+
+.header-list a::after {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: rgb(236, 113, 8);
+  transform: scale(0, 1);
+  transform-origin: right top;
+  transition: transform .3s;
+}
+.header-list a:hover::after {
+  transform-origin: left top;
+  transform: scale(1, 1);
+}
+
+.header-list a:hover {
+  color: rgb(236, 113, 8);
+  font-weight: bold;
+}
+
+
+// ハンバーガーメニュー
+.menu-btn {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    display: flex;
+    height: 80px;
+    width: 90px;
+    justify-content: center;
+    align-items: center;
+    z-index: 90;
+    background-color: #3B0B11;
+    border-radius: 50%;
+    object-fit: cover;
+    width: 80px;
+    height: 80px;
+}
+.menu-btn:hover {
+  background-color: #66452F;
+}
+.menu-btn span,
+.menu-btn span:before,
+.menu-btn span:after {
+    content: '';
+    display: block;
+    height: 4px;
+    width: 45px;
+    border-radius: 15px;
+    background-color: white;
+    position: absolute;
+}
+.menu-btn span:before {
+    bottom: 13px;
+}
+.menu-btn span:after {
+    top: 13px;
+}
+
+#menu-btn-check:checked ~ .menu-btn span {
+  background-color: rgba(255, 255, 255, 0);/*メニューオープン時は真ん中の線を透明にする*/
+}
+#menu-btn-check:checked ~ .menu-btn span::before {
+  bottom: 0;
+  transform: rotate(45deg);
+}
+#menu-btn-check:checked ~ .menu-btn span::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+#menu-btn-check {
+  display: none;
+}
+
+.menu-content {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 100%;;
+  z-index: 80;
+  background-color: #FAF4ED;
+  transition: all 0.5s;
+}
+.menu-content ul {
+  padding: 70px 10px 0;
+}
+.menu-content ul li {
+  //border-bottom: solid 1px #3B0B11;
+  list-style: none;
+  margin-top: 20px;
+}
+.menu-content ul li a {
+  display: table;
+  font-size: 20px;
+  box-sizing: border-box;
+  color:#3B0B11;
+  text-decoration: none;
+  padding: 9px 15px 0 0;
+  position: relative;
+}
+.menu-content ul li a::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-top: solid 2px #ffffff;
+  border-right: solid 2px #ffffff;
+  transform: rotate(45deg);
+  position: absolute;
+  right: 11px;
+  top: 16px;
+}
+
+#menu-btn-check:checked ~ .menu-content {
+  left: 70%;/*メニューを画面内へ*/
+}
+
+.menu-content a {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+.menu-content a:hover {
+  color: rgb(236, 113, 8);
+  font-weight: bold;
+}
+.menu-content a::after {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: rgb(236, 113, 8);
+  transform: scale(0, 1);
+  transform-origin: right top;
+  transition: transform .3s;
+}
+.menu-content a:hover::after {
+  transform-origin: left top;
+  transform: scale(1, 1);
+}
+
+footer {
+  background-color: #66452F;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+// タイトル
+h1 {
+  text-align: center;
+  font-size: 32px;
+  color: #3B0B11;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

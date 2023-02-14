@@ -1,0 +1,21 @@
+ja:
+  views:
+      pagination:
+        first: "&laquo; 最初"
+        last: "最後 &raquo;"
+        previous: "&lsaquo; 前へ"
+        next: "次へ &rsaquo;"
+        truncate: "..."
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: ""
+          one: "1 件中 <strong>1-1</strong>"
+          other: "%{count} 件中 <strong>1 - %{count}</strong> 件目を表示"
+      more_pages:
+        display_entries: "%{total} 件中 <strong>%{first} - %{last}</strong> 件目を表示"
+  activerecord:
+  errors:
+    messages:
+      record_invalid: "バリデーションに失敗しました: %{errors}"

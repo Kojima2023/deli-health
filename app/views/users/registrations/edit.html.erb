@@ -1,0 +1,61 @@
+<div class="login-wrapper">
+  <h1>プロフィール編集</h1>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
+
+    <div class="field">
+      <%= f.label :名前（ニックネーム） %><br />
+      <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    </div>
+    
+    <div class="field">
+      <%= f.label :プロフィール画像 %>
+      <%= f.file_field :image %>
+    </div>
+
+    <div class="field">
+      <%= f.label :自己紹介（200字以内） %><br />
+      <%= f.text_area :profile, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :メールアドレス %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :リンク情報 %><br />
+      <%= f.url_field :user_url, autofocus: true %>
+    </div>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+    <h2>変更が必要な場合のみ入力</h2>
+
+    <div class="field">
+      <%= f.label :パスワード %> <i></i><br />
+      <%= f.password_field :password, autocomplete: "new-password" %>
+      <% if @minimum_password_length %>
+        <br />
+        <em><%= @minimum_password_length %>字以上</em>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.label :パスワード再入力 %> <i></i><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "完了"%>
+    </div>
+  <% end %>
+
+  <h3>アカウント削除（ご不満でしたか？）</h3>
+
+  <p><%= button_to "アカウント削除", registration_path(resource_name), data: { confirm: "本当に削除してもよろしいですか？" }, method: :delete %></p>
+
+  <%= link_to "前のページに戻る", :back %>
+</div>

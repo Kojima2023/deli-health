@@ -1,0 +1,71 @@
+// Place all the styles related to the tomorecipes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.tomorecipes-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: calc(100% * 0.8);
+}
+
+.tomorecipe {
+  width: 360px;
+  height: 360px;
+  background-color: #ffd5f7;
+  margin-top: 24px;
+  margin-right: 24px;
+  border-radius: 7px;
+}
+
+// 検索項目
+.tomorecipes-search-items {
+  text-align: center;
+}
+
+.tomorecipes-search-items h3 {
+  color: #3B0B11;
+  font-size: 24px;
+}
+
+.tomorecipes-search-category {
+  display: flex;
+}
+
+.tomorecipes-search-category a {
+  margin-left: 10px;
+}
+.tomorecipes-search-category a:hover {
+  text-decoration: underline;
+  color: rgb(236, 113, 8);
+  font-weight: bold;
+}
+
+.tomorecipes-search-hashtag a:hover {
+  text-decoration: underline;
+  color: rgb(236, 113, 8);
+  font-weight: bold;
+}
+
+/*.tomorecipes-search {
+  
+}*/
+
+.tomorecipes-search{
+  input[type="submit"] {
+    width: 300px;
+    font-size: 20px;
+    font-family: 'Zen Antique Soft', sans-serif;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    color: white;
+    background-color: #3B0B11;
+  }
+}
+
+.user-icon {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 100px;
+  height: 100px;
+}

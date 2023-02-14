@@ -1,0 +1,48 @@
+<h1>検索したレシピの詳細</h1>
+
+<h3>検索カテゴリ</h3>
+<%= link_to "検索一覧", tomorecipes_path %>
+<%= link_to "病気", tomorecipes_sick_path %>
+<%= link_to "食物アレルギー・食物不耐症", tomorecipes_allergy_path %>
+<%= link_to "苦手", tomorecipes_weak_path %>
+<%= link_to "その他または理由なし", tomorecipes_others_path %>
+
+<div class="tomorecipe">
+  <%= image_tag @tomorecipe.image_url, size: "250x200" if @tomorecipe.image? %>
+  <%= image_tag @tomorecipe.image2_url, size: "250x200" if @tomorecipe.image2? %>
+  <%= image_tag @tomorecipe.image3_url, size: "250x200" if @tomorecipe.image3? %>
+  <%= image_tag @tomorecipe.image4_url, size: "250x200" if @tomorecipe.image4? %>
+  <%=  video_tag @tomorecipe.video_url, size: "250x200" ,:controls => true if @tomorecipe.video?%>
+  <p><%= @tomorecipe.title %></p>
+  <% @tomorecipe_tags.each do |tag| %>
+    #<%= link_to tag.tag_name, tag_tomorecipes_path(tag_id: tag.id) %>
+  <% end %>
+  <p>どんな方向けか？(原因・症状):　<%= @tomorecipe.category %></p>
+  <p><%= @tomorecipe.ingredient %></p>
+  <p><%= @tomorecipe.recipe %></p>
+  <p><%= @tomorecipe.time %></p>
+  <p><%= @tomorecipe.point %></p>
+  <p><%= @tomorecipe.cost %></p>
+  <p><%= @tomorecipe.created_at.strftime('%Y年%m月%d日') %></p>
+  <%= image_tag @tomorecipe.user.image_url, class: "user-icon" if @tomorecipe.user.image? %>
+  <%= link_to @tomorecipe.user.name, user_path(@tomorecipe.user.id) %>
+  <br>
+    <% if user_signed_in? %>
+      <% if current_user.already_liked?(@tomorecipe) %>
+        <%= link_to tomorecipe_like_path(@tomorecipe), method: :delete do %>
+            <i class="fas fa-heart"></i><%= @tomorecipe.likes.count %>
+        <% end %>
+      <% else %>
+        <%= link_to tomorecipe_likes_path(@tomorecipe), method: :tomorecipe do %>
+          <i class="fa-regular fa-heart"></i><%= @tomorecipe.likes.count %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <i class="fa-regular fa-heart"></i><%= @tomorecipe.likes.count %>
+    <% end %>
+</div>
+
+<% if user_signed_in? && current_user.id == @tomorecipe.user_id %>
+  <%= link_to "編集する", edit_tomorecipe_path(@tomorecipe.id) %>
+  <%= link_to "削除する", tomorecipe_path(@tomorecipe.id), method: :delete %>
+<% end %>

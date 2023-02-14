@@ -1,0 +1,63 @@
+<h1>新規投稿ページ</h1>
+
+<h3>検索カテゴリ</h3>
+<%= link_to "検索一覧", tomorecipes_path %>
+<%= link_to "病気", tomorecipes_sick_path %>
+<%= link_to "食物アレルギー・食物不耐症", tomorecipes_allergy_path %>
+<%= link_to "苦手", tomorecipes_weak_path %>
+<%= link_to "その他または理由なし", tomorecipes_others_path %>
+
+<%= form_with(model: @tomorecipe, url: tomorecipes_path, local: true) do |f| %>
+  <div class="field">
+    <%= f.label :レシピのタイトル（入力必須） %>
+    <%= f.text_field :title, :size => 30 %>
+  </div>
+
+  <p>検索カテゴリ</p>
+  <%= f.select :category, [["病気", "病気"], ["食物アレルギー・食物不耐症", "食物アレルギー・食物不耐症"], ["苦手", "苦手"], ["その他または理由なし", "その他または理由なし"]], include_blank: "どんな方向けですか？（原因・症状）" %>
+
+  <p>半角スペースを入力することで複数のハッシュタグを付けることができます。</p>
+  <%= f.text_field :tag_name, placeholder: "糖尿病 卵アレルギー にんじん嫌い 金欠" %>
+
+  <div class="field">
+    <%= f.label :画像 %>
+    <%= f.file_field :image %>
+    <%= f.label :画像2 %>
+    <%= f.file_field :image2 %>
+    <%= f.label :画像3 %>
+    <%= f.file_field :image3 %>
+    <%= f.label :画像4 %>
+    <%= f.file_field :image4 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :動画 %>
+    <%= f.file_field :video %>
+  </div>
+
+  <div class="field">
+    <%= f.label :材料  %>
+    <%= f.text_area :ingredient, :size => "30x2" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :レシピの詳細  %>
+    <%= f.text_area :recipe, :size => "30x2" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :所要時間 %>
+    <%= f.text_field :time, :size => 30 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :コツ・ポイント  %>
+    <%= f.text_area :point, :size => "30x2" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :費用 %>
+    <%= f.text_field :cost, :size => 30 %>
+  </div>
+  <%= f.submit "投稿する" %>
+<% end %>
